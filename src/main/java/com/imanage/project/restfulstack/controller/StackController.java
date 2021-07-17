@@ -1,5 +1,7 @@
 package com.imanage.project.restfulstack.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
-public class StackController {
+public class StackController<T> {
 
 	@Autowired
-	private RestfulStackService restfulStackService;
+	private RestfulStackService<Object> restfulStackService;
 
 	@PostMapping(value = "/push")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Stack Overflow") })
-	public ResponseEntity<Boolean> push(@RequestParam("element") int element) {
+	public ResponseEntity<Boolean> push(@RequestParam("element") T element) {
 		boolean result = restfulStackService.push(element);
 
 		if (result)
@@ -36,10 +38,10 @@ public class StackController {
 	@GetMapping(value = "/peek")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Stack Underflow") })
-	public ResponseEntity<Integer> peek() {
-		int result = restfulStackService.peek();
+	public ResponseEntity<Object> peek() {
+		Object result = restfulStackService.peek();
 
-		if (result == Integer.MIN_VALUE)
+		if (result == null)
 			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
 		else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
@@ -49,10 +51,10 @@ public class StackController {
 	@PostMapping(value = "/pop")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Stack Underflow") })
-	public ResponseEntity<Integer> pop() {
-		int result = restfulStackService.pop();
+	public ResponseEntity<Object> pop() {
+		Object result = restfulStackService.pop();
 
-		if (result == Integer.MIN_VALUE)
+		if (result == null)
 			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
 		else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
@@ -62,15 +64,14 @@ public class StackController {
 	@GetMapping(value = "/allElement")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Stack Underflow") })
-	public ResponseEntity<int[]> getAllElement(){
-		int[] result = restfulStackService.getAllElement();
+	public ResponseEntity<List<Object>> getAllElement(){
+		List<Object> result = restfulStackService.getAllElement();
 		
-		if(result.length == 0) {
+		if(result == null) {
 			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
 	}
-	
 }
