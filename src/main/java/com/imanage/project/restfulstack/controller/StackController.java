@@ -1,5 +1,6 @@
 package com.imanage.project.restfulstack.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class StackController<T> {
 		Object result = restfulStackService.peek();
 
 		if (result == null)
-			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("", HttpStatus.INTERNAL_SERVER_ERROR);
 		else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
@@ -55,7 +56,7 @@ public class StackController<T> {
 		Object result = restfulStackService.pop();
 
 		if (result == null)
-			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("", HttpStatus.INTERNAL_SERVER_ERROR);
 		else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
@@ -68,7 +69,7 @@ public class StackController<T> {
 		List<Object> result = restfulStackService.getAllElement();
 		
 		if(result == null) {
-			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new ArrayList<Object>(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
