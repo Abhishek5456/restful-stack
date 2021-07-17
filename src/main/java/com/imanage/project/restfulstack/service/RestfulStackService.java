@@ -1,15 +1,17 @@
 package com.imanage.project.restfulstack.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
-public interface RestfulStackService {
+public interface RestfulStackService<T> {
 	
-	boolean push(int element);
+	boolean push(T element);
 	
-	int peek();
+	T peek();
 	
-	int pop();
+	T pop();
 	
-	int[] getAllElement();
+	List<T> getAllElement();
 }

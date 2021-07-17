@@ -1,42 +1,38 @@
 package com.imanage.project.restfulstack.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.imanage.project.restfulstack.dao.Stack;
 
 @Service
-public class RestfulStackServiceImpl implements RestfulStackService{
+public class RestfulStackServiceImpl implements RestfulStackService<Object>{
 
 	@Autowired
-	private Stack stack;
+	private Stack<Object> stack;
 
 	@Override
-	public boolean push(int element) {
+	public boolean push(Object element) {
 		boolean result =  stack.push(element);
 		
 		return result;
 	}
 
 	@Override
-	public int peek() {
-		int element = stack.peek();
-		
+	public Object peek() {
+		Object element = stack.peek();
 		return element;
 	}
 
 	@Override
-	public int pop() {
-		int element = stack.pop();
-		
-		return element;
+	public Object pop() {
+		return stack.pop();
 	}
 
 	@Override
-	public int[] getAllElement() {
-		
-		int[] data = stack.getAllElement();
-		
-		return data;
+	public List<Object> getAllElement() {
+		return stack.getAllElement();
 	}
 }
