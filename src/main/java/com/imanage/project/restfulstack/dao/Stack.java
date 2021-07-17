@@ -17,7 +17,6 @@ public class Stack {
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("I have been called");
 		data = new int[size];
 		top = -1;
 	}
@@ -42,6 +41,19 @@ public class Stack {
 			return Integer.MIN_VALUE;
 		
 		return data[top];
+	}
+	
+	public int[] getAllElement() {
+		if(isEmpty())
+			return new int[0];
+
+		int j =0;
+		int[] currentElements = new int[top+1];
+		for(int i = top; i>=0; i--) {
+			currentElements[j++] = data[i];
+		}
+		
+		return currentElements;
 	}
 	
 	private boolean isEmpty() {

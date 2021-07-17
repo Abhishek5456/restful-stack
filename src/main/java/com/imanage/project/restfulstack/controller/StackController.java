@@ -58,4 +58,19 @@ public class StackController {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping(value = "/allElement")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+			@ApiResponse(responseCode = "500", description = "Stack Underflow") })
+	public ResponseEntity<int[]> getAllElement(){
+		int[] result = restfulStackService.getAllElement();
+		
+		if(result.length == 0) {
+			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else {
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}
+	}
+	
 }

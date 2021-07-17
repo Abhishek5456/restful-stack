@@ -31,4 +31,12 @@ public class RestfulStackServiceImpl implements RestfulStackService{
 		
 		return element;
 	}
+
+	@Override
+	public int[] getAllElement() {
+		
+		int[] data = stack.getAllElement();
+		
+		return data;
+	}
 }

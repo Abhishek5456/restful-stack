@@ -10,4 +10,6 @@ public interface RestfulStackService {
 	int peek();
 	
 	int pop();
+	
+	int[] getAllElement();
 }
